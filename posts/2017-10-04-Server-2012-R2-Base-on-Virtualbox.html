@@ -1,72 +1,88 @@
-<link type="text/css" rel="stylesheet" href="stylesheets/main.css" />
+<!DOCTYPE html>
+<html>
 
-<p>
-Since I am planning to take my Linux Foundation Certified Sysadmin (LFCS)  and possibly Redhat Certified SysAdmin
-(RHCSA) I have installed Fedora on my laptop that I usually carry around with my labs on it. That means I need to learn
-how VitualBox works. I want to make a differencing disk for my server 2012 r2 install like I did with Hyper-V. Hopefully
-save disk space this way because I can re-use those base bits across all my VMs.
-</p>
+<head>
+  <link type="text/css" rel="stylesheet" href="../stylesheets/main.css" />
+</head>
 
-<p>
-In virtualbox, a differencing disk is called a Multiattach disk:
-</p>
+<body>
+  <p>
+    Since I am planning to take my Linux Foundation Certified Sysadmin (LFCS) and possibly Redhat Certified SysAdmin
+    (RHCSA) I have installed Fedora on my laptop that I usually carry around with my labs on it. That means I need to
+    learn
+    how VitualBox works. I want to make a differencing disk for my server 2012 r2 install like I did with Hyper-V.
+    Hopefully
+    save disk space this way because I can re-use those base bits across all my VMs.
+  </p>
 
-<blockquote>
-An image in multiattach mode can be attached to more than one virtual machine at the same time, even if these machines
-are running simultaneously. For each virtual machine to which such an image is attached, a differencing image is
-created. As a result, data that is written to such a virtual disk by one machine is not seen by the other machines to
-which the image is attached; each machine creates its own write history of the multiattach image.
-</blockquote>
+  <p>
+    In virtualbox, a differencing disk is called a Multiattach disk:
+  </p>
 
-<blockquote>
-Technically, a "multiattach" image behaves identically to an "immutable" image except the differencing image is not
-reset every time the machine starts.
-</blockquote>
+  <blockquote>
+    An image in multiattach mode can be attached to more than one virtual machine at the same time, even if these
+    machines
+    are running simultaneously. For each virtual machine to which such an image is attached, a differencing image is
+    created. As a result, data that is written to such a virtual disk by one machine is not seen by the other machines
+    to
+    which the image is attached; each machine creates its own write history of the multiattach image.
+  </blockquote>
 
-<pre>
+  <blockquote>
+    Technically, a "multiattach" image behaves identically to an "immutable" image except the differencing image is not
+    reset every time the machine starts.
+  </blockquote>
+
+  <pre>
 This mode is useful for sharing files which are almost never written, for instance picture galleries, where every guest
 changes only a small amount of data and the majority of the disk content remains unchanged. The modified blocks are
 stored in differencing images which remain relatively small and the shared content is stored only once at the host.
 </pre>
 
-<p>
-https://www.virtualbox.org/manual/ch05.html<br>
-https://morgansimonsen.com/2012/05/09/working-with-differencing-disks-in-virtualbox/
-</p>
+  <p>
+    https://www.virtualbox.org/manual/ch05.html<br>
+    https://morgansimonsen.com/2012/05/09/working-with-differencing-disks-in-virtualbox/
+  </p>
 
-<h1>Process</h1>
+  <h1>Process</h1>
 
-<p>
-Install 2012r2<br>
+  <p>
+    Install 2012r2<br>
 
-Patch it using the PSWindowsUpdate Powershell module<br>
+    Patch it using the PSWindowsUpdate Powershell module<br>
 
-Reduce the size of the installation by cleaning up all the components that were superseded by all those updaes. <br>
+    Reduce the size of the installation by cleaning up all the components that were superseded by all those updaes. <br>
 
-<pre><code>dism.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase</code></pre>
+  <pre><code>dism.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase</code></pre>
 
-<p>
-File Explorer reported the C drive being about 21.22 GB before operation and now it's reporting 12.4GB. Not super
-scientific analysis but DISM is certainly shaving off some bits.<br>
+  <p>
+    File Explorer reported the C drive being about 21.22 GB before operation and now it's reporting 12.4GB. Not super
+    scientific analysis but DISM is certainly shaving off some bits.<br>
 
-My dynamically-expanding virtualbox virtual disk is still 25 GB - what I initially set it as. I really want to shrink
-this if it's going to be used as the base for many VMs.<br>
-</p>
-<code><pre>$ vboxmanage modifymedium disk '/home/adam/VirtualBox VMs/base-2012r2/base-2012r2.vdi' --compact</code></pre>
+    My dynamically-expanding virtualbox virtual disk is still 25 GB - what I initially set it as. I really want to
+    shrink
+    this if it's going to be used as the base for many VMs.<br>
+  </p>
+  <code><pre>$ vboxmanage modifymedium disk '/home/adam/VirtualBox VMs/base-2012r2/base-2012r2.vdi' --compact</code>
+  </pre>
 
-<p>
-Looks like the above operation was not that effective - it saved me about 100MB. Sure enough, from the VirtualBox doco:
-</p>
+  <p>
+    Looks like the above operation was not that effective - it saved me about 100MB. Sure enough, from the VirtualBox
+    doco:
+  </p>
 
-<blockquote>
-For this operation to be effective, it is required that free space in the guest system first be zeroed out using a
-suitable software tool. 
-</blockquote>
-<p>
-Let's use the SysInternals tool SDelete to Zero the free space.
-</p>
-<pre><code>sdelete64.exe -z C:</code></pre>
-<p>
-Re-run the above compact operation on the VDI...and its now down from 24.8GB to 16.2GB just by a quick check in the
-gnome file explorer.
-</p>
+  <blockquote>
+    For this operation to be effective, it is required that free space in the guest system first be zeroed out using a
+    suitable software tool.
+  </blockquote>
+  <p>
+    Let's use the SysInternals tool SDelete to Zero the free space.
+  </p>
+  <pre><code>sdelete64.exe -z C:</code></pre>
+  <p>
+    Re-run the above compact operation on the VDI...and its now down from 24.8GB to 16.2GB just by a quick check in the
+    gnome file explorer.
+  </p>
+</body>
+
+</html>
