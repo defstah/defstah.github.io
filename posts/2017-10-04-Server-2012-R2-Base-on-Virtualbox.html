@@ -35,11 +35,11 @@
     reset every time the machine starts.
   </blockquote>
 
-  <pre>
+  <blockquote>
 This mode is useful for sharing files which are almost never written, for instance picture galleries, where every guest
 changes only a small amount of data and the majority of the disk content remains unchanged. The modified blocks are
 stored in differencing images which remain relatively small and the shared content is stored only once at the host.
-</pre>
+  </blockquote>
 
   <p>
     https://www.virtualbox.org/manual/ch05.html<br>
@@ -55,7 +55,7 @@ stored in differencing images which remain relatively small and the shared conte
 
     Reduce the size of the installation by cleaning up all the components that were superseded by all those updaes. <br>
 
-  <pre><code>dism.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase</code></pre>
+  <code>dism.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase</code>
 
   <p>
     File Explorer reported the C drive being about 21.22 GB before operation and now it's reporting 12.4GB. Not super
@@ -64,8 +64,7 @@ stored in differencing images which remain relatively small and the shared conte
     My dynamically-expanding virtualbox virtual disk is still 25 GB - what I initially set it as. I really want to
     shrink this if it's going to be used as the base for many VMs.<br>
   </p>
-  <code><pre>$ vboxmanage modifymedium disk '/home/adam/VirtualBox VMs/base-2012r2/base-2012r2.vdi' --compact</code>
-  </pre>
+  <code>$ vboxmanage modifymedium disk '/home/adam/VirtualBox VMs/base-2012r2/base-2012r2.vdi' --compact</code>
 
   <p>
     Looks like the above operation was not that effective - it saved me about 100MB. Sure enough, from the VirtualBox
@@ -79,7 +78,7 @@ stored in differencing images which remain relatively small and the shared conte
   <p>
     Let's use the SysInternals tool SDelete to Zero the free space.
   </p>
-  <pre><code>sdelete64.exe -z C:</code></pre>
+  <code>sdelete64.exe -z C:</code>
   <p>
     Re-run the above compact operation on the VDI...and its now down from 24.8GB to 16.2GB just by a quick check in the
     gnome file explorer.
