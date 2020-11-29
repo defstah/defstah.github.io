@@ -1,10 +1,8 @@
 body {
 color: #444;
 font-family: 'Open Sans Condensed', sans-serif;
-margin: 0 auto;
-max-width: 48rem;
-line-height: 1.45;
-padding: .25rem;
+max-width: 60vw;
+margin: 0 auto 
 }
 
 h1,
@@ -13,20 +11,20 @@ h3,
 h4,
 h5,
 h6 {
-margin-block-start: 1.5em;
-margin-block-end: 0.5em;
+margin-block-start: 10vw;
+margin-block-end: 5vw;
 font-family: Arimo, Helvetica, sans-serif;
 }
 
 h1,
 h2,
 h3 {
-border-bottom: 2px solid #fafafa;
+border-bottom: 1vw solid #fafafa;
 }
 
 blockquote {
-border-left: 8px solid #fafafa;
-padding: 1rem;
+border-left: 1vw solid #fafafa;
+padding: 1vw;
 }
 
 p {
@@ -51,32 +49,14 @@ overflow-x: scroll;
     position: relative
 }
 
-.wrapper {
-    max-width: 800px
-}
-.wrapper {
-    max-width: -webkit-calc(800px - (30px * 2));
-    max-width: calc(800px - (30px * 2));
-    margin-right: auto;
-    margin-left: auto;
-    padding-right: 30px;
-    padding-left: 30px
-}
+
 
 @media screen and (max-width: 800px) {
-    .wrapper {
-        max-width:-webkit-calc(800px - (30px));
-        max-width: calc(800px - (30px));
-        padding-right: 15px;
-        padding-left: 15px
-    }
+    body {
+        max-width: 95vw;
+        }
 }
 
-.wrapper:after, .footer-col-wrapper:after {
-    content: "";
-    display: table;
-    clear: both
-}
 
 .site-title {
     font-size: 26px;

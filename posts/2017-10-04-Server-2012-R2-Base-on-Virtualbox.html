@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
 <title>Server 2012 R2 Base on Virtualbox</title>
+
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link type="text/css" rel="stylesheet" href="../stylesheets/main.css" />
 </head>
 
@@ -13,10 +15,8 @@
   <p>
     Since I am planning to take my Linux Foundation Certified Sysadmin (LFCS) and possibly Redhat Certified SysAdmin
     (RHCSA) I have installed Fedora on my laptop that I usually carry around with my labs on it. That means I need to
-    learn
-    how VitualBox works. I want to make a differencing disk for my server 2012 r2 install like I did with Hyper-V.
-    Hopefully
-    save disk space this way because I can re-use those base bits across all my VMs.
+    learn how VitualBox works. I want to make a differencing disk for my server 2012 r2 install like I did with Hyper-V.
+    Hopefully save disk space this way because I can re-use those base bits across all my VMs.
   </p>
 
   <p>
@@ -25,11 +25,9 @@
 
   <blockquote>
     An image in multiattach mode can be attached to more than one virtual machine at the same time, even if these
-    machines
-    are running simultaneously. For each virtual machine to which such an image is attached, a differencing image is
-    created. As a result, data that is written to such a virtual disk by one machine is not seen by the other machines
-    to
-    which the image is attached; each machine creates its own write history of the multiattach image.
+    machines are running simultaneously. For each virtual machine to which such an image is attached, a differencing
+    image is created. As a result, data that is written to such a virtual disk by one machine is not seen by the other
+    machines to which the image is attached; each machine creates its own write history of the multiattach image.
   </blockquote>
 
   <blockquote>
@@ -64,8 +62,7 @@ stored in differencing images which remain relatively small and the shared conte
     scientific analysis but DISM is certainly shaving off some bits.<br>
 
     My dynamically-expanding virtualbox virtual disk is still 25 GB - what I initially set it as. I really want to
-    shrink
-    this if it's going to be used as the base for many VMs.<br>
+    shrink this if it's going to be used as the base for many VMs.<br>
   </p>
   <code><pre>$ vboxmanage modifymedium disk '/home/adam/VirtualBox VMs/base-2012r2/base-2012r2.vdi' --compact</code>
   </pre>
