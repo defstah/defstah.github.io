@@ -11,8 +11,8 @@ h3,
 h4,
 h5,
 h6 {
-margin-block-start: 10vw;
-margin-block-end: 5vw;
+margin-block-start: 3vw;
+margin-block-end: 2vw;
 font-family: Arimo, Helvetica, sans-serif;
 }
 
@@ -44,13 +44,6 @@ line-height: 1.25;
 overflow-x: scroll;
 }
 
-.site-header {
-    min-height: 55.95px;
-    position: relative
-}
-
-
-
 @media screen and (max-width: 800px) {
     body {
         max-width: 95vw;
@@ -58,32 +51,11 @@ overflow-x: scroll;
 }
 
 
-.site-title {
-    font-size: 26px;
-    font-weight: 300;
-    line-height: 54px;
-    letter-spacing: -1px;
-    margin-bottom: 0;
-    float: left
-}
-
-.site-title, .site-title:visited {
-    color: #424242
-}
-
 .site-footer .site-title, .site-header .site-title {
-    letter-spacing: 0.15rem;
     display: block;
     text-align: center;
-    margin: 2rem auto;
-    font-size: 1.2rem;
-    line-height: 1.5;
-    font-weight: bold;
+    margin: 5vw auto;
     float: none;
-    color: #fcfdff;
-    text-decoration: none
-}
-
-.site-footer, .site-header {
-    color: #fcfdff
+    text-decoration: none;
+    font-size: 3em;
 }
